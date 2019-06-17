@@ -7,18 +7,14 @@ executors:
     working_directory: /tmp
 
 jobs:
-  flow:
+  check-auth:
     executor: my-executor
     steps:
       - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-      
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      - run: pwd
+      - run: sh check_response.sh
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
-          # taken to be the root directory of the workspace.
           root: workspace
-          # Must be relative path from root
           paths:
             - echo-output
 
@@ -26,22 +22,15 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
-
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
+      - run: cat /tmp/workspace/echo-output
 
 workflows:
   version: 2
 
   btd:
     jobs:
-      - flow
+      - check-auth
       - downstream:
           requires:
-            - flow
+            - check-auth
