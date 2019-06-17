@@ -10,6 +10,7 @@ jobs:
   check-auth:
     executor: my-executor
     steps:
+      - checkout
       - run: mkdir -p workspace
       - run: pwd
       - run: sh check_response.sh
