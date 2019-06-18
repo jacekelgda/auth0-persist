@@ -4,6 +4,7 @@ API_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $JOB_PIM_API_ROUTE --heade
 NOT_AUTHORIZED="401"
 
 if [ "$API_RESPONSE" = "$NOT_AUTHORIZED" ]; then
+    echo "REQUESTING NEW TOKEN..."
     NEW_TOKEN=$(curl --request POST \
     --url $JOB_AUTH_DOMAIN \
     --header 'content-type: application/json' \
