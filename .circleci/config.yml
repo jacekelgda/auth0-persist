@@ -14,7 +14,6 @@ jobs:
             - auth-cache-
       - checkout
       - run: mkdir -p ~/auth
-      - run: sh ~/project/.circleci/source_token.sh
       - run: sh ~/project/.circleci/check_response.sh
       - save_cache:
           key: auth-cache-{{ checksum "~/auth/token" }}
