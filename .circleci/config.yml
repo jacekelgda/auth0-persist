@@ -5,17 +5,17 @@ jobs:
     docker:
       - image: buildpack-deps:jessie
     steps:
-      - restore_cache:
-        keys:
-          - auth-cache-{{ checksum "~/auth/token" }}
+      # - restore_cache:
+      #   keys:
+      #     - auth-cache-{{ checksum "~/auth/token" }}
       - checkout
       - run: mkdir -p ~/auth
       - run: ls ~/auth
       - run: sh ~/project/.circleci/check_response.sh
-      - save_cache:
-        key: auth-cache-{{ checksum "~/auth/token" }}
-        paths:
-          - "~/auth"
+      # - save_cache:
+      #   key: auth-cache-{{ checksum "~/auth/token" }}
+      #   paths:
+      #     - "~/auth"
 
 workflows:
   version: 2
