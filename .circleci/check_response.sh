@@ -12,5 +12,5 @@ if [ "$API_RESPONSE" = "$NOT_AUTHORIZED" ]; then
 
     echo "$NEW_TOKEN" > ~/auth/token
 else
-  echo "Token is valid"
+  echo "VALID TOKEN EXISTS"
 fi
