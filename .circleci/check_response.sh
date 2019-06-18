@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "CURRENT TOKEN: $JOB_PIM_ACCESS_TOKEN"
 API_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $JOB_PIM_API_ROUTE --header "authorization: $JOB_PIM_ACCESS_TOKEN")
 NOT_AUTHORIZED="401"
 
