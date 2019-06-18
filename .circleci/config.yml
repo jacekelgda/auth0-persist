@@ -4,16 +4,16 @@ jobs:
   check-auth:
     steps:
       - restore_cache:
-        keys:
-          - auth-cache-{{ checksum "~/auth/token" }}
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
       - checkout
       - run: mkdir -p ~/auth
       - run: ls ~/auth
       - run: sh ~/project/.circleci/check_response.sh
       - save_cache:
-        key: auth-cache-{{ checksum "~/auth/token" }}
-        paths:
-          - "~/auth"
+          key: auth-cache-{{ checksum "~/auth/token" }}
+          paths:
+            - "~/auth"
 
 
 workflows:
