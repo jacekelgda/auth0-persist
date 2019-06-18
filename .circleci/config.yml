@@ -1,37 +1,16 @@
 version: 2.1
 
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
-    working_directory: ~/project
-
 jobs:
   check-auth:
-    executor: my-executor
     steps:
       - checkout
-      - run: cat /tmp/workspace/echo-output
-      - run: mkdir -p workspace
+      - run: mkdir -p ~/auth
+      - run: ls ~/auth
       - run: sh ~/project/.circleci/check_response.sh
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
-
-  downstream:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - run: cat /tmp/workspace/echo-output
 
 workflows:
   version: 2
 
-  btd:
+  auth:
     jobs:
       - check-auth
-      - downstream:
-          requires:
-            - check-auth

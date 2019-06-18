@@ -9,7 +9,7 @@ if [ "$API_RESPONSE" = "$NOT_AUTHORIZED" ]; then
     --header 'content-type: application/json' \
     --data "{\"client_id\":\"$JOB_AUTH_CLIENT_ID\",\"client_secret\":\"$JOB_AUTH_SECRET\",\"audience\":\"$JOB_AUTH_AUDIENCE\",\"grant_type\":\"client_credentials\"}")
 
-    echo "$NEW_TOKEN" > ~/project/workspace/echo-output
+    echo "$NEW_TOKEN" > ~/auth/token
 else
   echo "Token is valid"
 fi
