@@ -7,13 +7,13 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - auth-cache-pim
+            - auth-cache-
       - checkout
       - run: mkdir -p ~/auth
       - run: ls ~/auth
       - run: sh ~/project/.circleci/check_response.sh
       - save_cache:
-          key: auth-cache-pim
+          key: auth-cache-{{ checksum "~/auth/token" }}
           paths:
             - "~/auth"
 
